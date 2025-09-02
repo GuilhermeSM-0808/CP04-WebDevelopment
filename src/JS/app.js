@@ -135,32 +135,56 @@ function displayCartas() {
             const cartaElement = document.createElement('div');
             cartaElement.classList.add('carta-post');
 
+        
+            
             if (pegaPost.favorita === true) {
                 cartaElement.innerHTML = `
-                    <p>${pegaPost.nome}</p>
-                    ${pegaPost.foto ? `<img src="${pegaPost.foto}" alt="Imagem do post" style="max-width:150px;">` : ""}
-                    <p><em>Posicao: ${pegaPost.posicao}</em></p>
-                    <p><em>Clube: ${pegaPost.clube}</em></p>
-                    <p><em>Gols: ${pegaPost.gols}</em></p>
-                    <p><em>Assistencias: ${pegaPost.assistencias}</em></p>
-                    <p><em>Jogos: ${pegaPost.jogos}</em></p>
-                    <i class="fa-solid fa-star"></i>
-                    <button data-action="edit" data-index="${index}"><i class="fa-solid fa-pen-to-square"></i> Editar</button><br><br>
-                    <button data-action="delete" data-index="${index}"><i class="fa-solid fa-eraser"></i> Apagar</button>
-                    <hr style="margin:30px;">`;
+                    <div class="col">
+                        <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('${pegaPost.foto}');"> 
+                            <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1"> 
+                                <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">${pegaPost.nome}</h3> 
+                                <h4 class="pt-2 mt-2 mb-6 display-7 lh-1 fw-bold">${pegaPost.clube}</h4> 
+                                <h6 class="pt-2 mt-4 mb-6 display-7 lh-1 fw-bold">${pegaPost.posicao}</h6> 
+                                <ul class="d-flex list-unstyled mt-auto"> 
+                                    <li class="d-flex align-items-center me-3 fw-bold"> 
+                                        <p>Gols: ${pegaPost.gols}</p>
+                                    </li> 
+                                    <li class="d-flex align-items-center me-3 fw-bold">                                
+                                        <p>Assitencias: ${pegaPost.assistencias}</p> 
+                                    </li> 
+                                    <li class="d-flex align-items-center me-3 fw-bold">                                 
+                                        <p>Jogos: ${pegaPost.jogos}</p> 
+                                    </li> 
+                                </ul> 
+                            </div> 
+                        </div> 
+                        <button data-action="edit" data-index="${index}" class="btn btn-primary rounded-pill px-3"> Editar</button>
+                        <button data-action="delete" data-index="${index}" class="btn btn-danger rounded-pill px-3"> Apagar</button>
+                    </div>`;
             } else {
                 cartaElement.innerHTML = `
-                    <p>${pegaPost.nome}</p>
-                    ${pegaPost.foto ? `<img src="${pegaPost.foto}" alt="Imagem do post" style="max-width:150px;">` : ""}
-                    <p><em>Posicao: ${pegaPost.posicao}</em></p>
-                    <p><em>Clube: ${pegaPost.clube}</em></p>
-                    <p><em>Gols: ${pegaPost.gols}</em></p>
-                    <p><em>Assistencias: ${pegaPost.assistencias}</em></p>
-                    <p><em>Jogos: ${pegaPost.jogos}</em></p>
-                    <i class="fa-regular fa-star"></i><br><br>
-                    <button data-action="edit" data-index="${index}"><i class="fa-solid fa-pen-to-square"></i> Editar</button>
-                    <button data-action="delete" data-index="${index}"><i class="fa-solid fa-eraser"></i> Apagar</button>
-                    <hr style="margin:30px;">`;
+                    <div class="col">
+                        <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('${pegaPost.foto}');"> 
+                            <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1"> 
+                                <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">${pegaPost.nome}</h3> 
+                                <h4 class="pt-2 mt-2 mb-6 display-7 lh-1 fw-bold">${pegaPost.clube}</h4> 
+                                <h6 class="pt-2 mt-4 mb-6 display-7 lh-1 fw-bold">${pegaPost.posicao}</h6> 
+                                <ul class="d-flex list-unstyled mt-auto"> 
+                                    <li class="d-flex align-items-center me-3 fw-bold"> 
+                                        <p>Gols: ${pegaPost.gols}</p>
+                                    </li> 
+                                    <li class="d-flex align-items-center me-3 fw-bold">                                
+                                        <p>Assitencias: ${pegaPost.assistencias}</p> 
+                                    </li> 
+                                    <li class="d-flex align-items-center me-3 fw-bold">                                 
+                                        <p>Jogos: ${pegaPost.jogos}</p> 
+                                    </li> 
+                                </ul> 
+                            </div> 
+                        </div> 
+                        <button data-action="edit" data-index="${index}" class="btn btn-primary rounded-pill px-3"> Editar</button>
+                        <button data-action="delete" data-index="${index}" class="btn btn-danger rounded-pill px-3"> Apagar</button>
+                    </div>`;
                
             cartaList.append(cartaElement);
         }
