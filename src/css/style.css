@@ -75,9 +75,9 @@ li {
     margin-bottom: 5px;
     padding: 15px;
 }
-#postList{
+/* #cartaList{
    text-align: center;
-}
+} */
 
 .card-post{
     display: flex;

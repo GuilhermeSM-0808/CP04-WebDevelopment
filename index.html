@@ -17,35 +17,53 @@
 
     <!-- Formulário para criar um novo carta -->
     <form id="cartaForm">
-        <i class="fa-solid fa-pen"></i> <label for="cartaNome"> Digite o nome da jogadora:</label><br>
-        <textarea id="cartaNome" rows="4" cols="50" placeholder="Andressa Alves"></textarea><br>
-        <i class="fa-solid fa-pen"></i> <label for="cartaClube"> Digite o nome do Clube da jogadora:</label><br>
-        <textarea id="cartaClube" rows="4" cols="50" placeholder="Clube/Time"></textarea><br>
-        <i class="fa-solid fa-list"></i> <label for="cartaPosicao">Posicao:</label>
-        <select id="cartaPosicao">
-            <option value="Goleira">Goleira</option>
-            <option value="Zagueira">Zagueira</option>
-            <option value="Lateral">Lateral</option>
-            <option value="Alas">Alas</option>
-            <option value="Libero">Libero</option>
-            <option value="Volante">Volante</option>
-            <option value="Meio-Central">Meio-Central</option>
-            <option value="Armadora">Armadora</option>
-            <option value="Pontas">Pontas</option>
-            <option value="Centroavante">Centroavante</option>
-            <option value="Segundo-Atacante">Segundo Atacante</option>
-        </select><br>
-        <i class="fa-solid fa-image"></i> <label for="cartaImage">Insira uma foto (URL):</label><br>
-        <input type="text" id="cartaImage" placeholder="Insira a url aqui"><br>
-        <i class="fa-solid fa-futbol"></i> <label for="cartaGols">Quantidade de gols:</label><br>
-        <input type="text" id="cartaGols" placeholder="8"><br>
-        <i class="fa-solid fa-futbol"></i> <label for="cartaAssistencias">Quantidade de assistencias:</label><br>
-        <input type="text" id="cartaAssistencias" placeholder="32"><br>
-        <i class="fa-solid fa-futbol"></i> <label for="cartaJogos">Quantidade de jogos oficias participados:</label><br>
-        <input type="text" id="cartaJogos" placeholder="64"><br>
-        <i class="fa-solid fa-star"></i> <label for="cartaFavorita">Favorita?</label>
-        <input type="checkbox" id="cartaFavorita"><br> <br>
-        <button type="submit"><i class="fa-solid fa-bullhorn"></i> Registrar Carta!</button>
+        <div class="row">
+            <div class="col-md-6">
+                <i class="fa-solid fa-pen"></i> <label for="cartaNome"> Digite o nome da jogadora:</label><br>
+                <textarea id="cartaNome" rows="4" cols="50" placeholder="Andressa Alves"></textarea><br>
+            </div>
+            <div class="col-md-6">
+                <i class="fa-solid fa-pen"></i> <label for="cartaClube"> Digite o nome do Clube da jogadora:</label><br>
+                <textarea id="cartaClube" rows="4" cols="50" placeholder="Clube/Time"></textarea><br>
+            </div>
+            <div class="col-md-4">
+                <i class="fa-solid fa-list"></i> <label for="cartaPosicao">Posicao:</label>
+                <select id="cartaPosicao">
+                    <option value="Goleira">Goleira</option>
+                    <option value="Zagueira">Zagueira</option>
+                    <option value="Lateral">Lateral</option>
+                    <option value="Alas">Alas</option>
+                    <option value="Libero">Libero</option>
+                    <option value="Volante">Volante</option>
+                    <option value="Meio-Central">Meio-Central</option>
+                    <option value="Armadora">Armadora</option>
+                    <option value="Pontas">Pontas</option>
+                    <option value="Centroavante">Centroavante</option>
+                    <option value="Segundo-Atacante">Segundo Atacante</option>
+                </select><br>
+            </div>
+            <div class="col-md-4">
+                <i class="fa-solid fa-image"></i> <label for="cartaImage">Insira uma foto (URL):</label><br>
+                <input type="text" id="cartaImage" placeholder="Insira a url aqui"><br>
+            </div>
+            <div class="col-md-4">
+                <i class="fa-solid fa-futbol"></i> <label for="cartaGols">Quantidade de gols:</label><br>
+                <input type="text" id="cartaGols" placeholder="8"><br>
+            </div>
+            <div class="col-md-4">
+                <i class="fa-solid fa-futbol"></i> <label for="cartaAssistencias">Quantidade de assistencias:</label><br>
+                <input type="text" id="cartaAssistencias" placeholder="32"><br>
+            </div>
+            <div class="col-md-4">
+                <i class="fa-solid fa-futbol"></i> <label for="cartaJogos">Quantidade de jogos oficias participados:</label><br>
+                <input type="text" id="cartaJogos" placeholder="64"><br>
+            </div>
+            <div class="col-md-4">
+                <i class="fa-solid fa-star"></i> <label for="cartaFavorita"><h4 class="fw-bold">Favorita?</h4></label>
+                <input type="checkbox" id="cartaFavorita" class="form-check-input"><br> <br>
+            </div>
+            <button type="submit"><i class="fa-solid fa-bullhorn"></i> Registrar Carta!</button>
+        </div>
     </form>
 
     <h1>Cartas de Jogadoras:</h1>
