@@ -97,16 +97,10 @@ function addCarta(event) {
     const cartaPosicao = document.getElementById('cartaPosicao').value;
     const cartaClube = document.getElementById('cartaClube').value;
     const cartaImage = document.getElementById('cartaImage').value;
-    const cartaGols = document.getElementById('cartaFavorita').value;
+    const cartaGols = document.getElementById('cartaGols').value;
     const cartaAssistencias = document.getElementById('cartaAssistencias').value;
     const cartaJogos = document.getElementById('cartaJogos').value;
     const cartaFavorita = document.getElementById('cartaFavorita').value;
-
-    if (cartaFavorita === "on") {
-        cartaFavorita = true;
-    } else {
-        cartaFavorita = false;
-    }
     
     const carta = { 
         nome: cartaNome, 
@@ -116,7 +110,7 @@ function addCarta(event) {
         gols: cartaGols, 
         assistencias: cartaAssistencias, 
         jogos: cartaJogos, 
-        favorita: cartaFavorita 
+        favorita: cartaFavorita
     };
     
     Cartas.unshift(carta);
@@ -137,10 +131,10 @@ function displayCartas() {
 
         
             
-            if (pegaPost.favorita === true) {
+            if (pegaPost.favorita === "on") {
                 cartaElement.innerHTML = `
                     <div class="col">
-                        <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('${pegaPost.foto}');"> 
+                        <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg text-border favorita" style="background-image: url('${pegaPost.foto}');"> 
                             <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1"> 
                                 <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">${pegaPost.nome}</h3> 
                                 <h4 class="pt-2 mt-2 mb-6 display-7 lh-1 fw-bold">${pegaPost.clube}</h4> 
@@ -158,13 +152,15 @@ function displayCartas() {
                                 </ul> 
                             </div> 
                         </div> 
-                        <button data-action="edit" data-index="${index}" class="btn btn-primary rounded-pill px-3"> Editar</button>
-                        <button data-action="delete" data-index="${index}" class="btn btn-danger rounded-pill px-3"> Apagar</button>
+                        <div class="mt-2 mb-2">
+                            <button data-action="edit" data-index="${index}" class="btn btn-primary rounded-pill px-3"> Editar</button>
+                            <button data-action="delete" data-index="${index}" class="btn btn-danger rounded-pill px-3"> Apagar</button>
+                        </div>
                     </div>`;
             } else {
                 cartaElement.innerHTML = `
                     <div class="col">
-                        <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('${pegaPost.foto}');"> 
+                        <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg text-border" style="background-image: url('${pegaPost.foto}');"> 
                             <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1"> 
                                 <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">${pegaPost.nome}</h3> 
                                 <h4 class="pt-2 mt-2 mb-6 display-7 lh-1 fw-bold">${pegaPost.clube}</h4> 
@@ -182,20 +178,29 @@ function displayCartas() {
                                 </ul> 
                             </div> 
                         </div> 
-                        <button data-action="edit" data-index="${index}" class="btn btn-primary rounded-pill px-3"> Editar</button>
-                        <button data-action="delete" data-index="${index}" class="btn btn-danger rounded-pill px-3"> Apagar</button>
-                    </div>`;
+                        <div class="mt-2 mb-2">
+                            <button data-action="edit" data-index="${index}" class="btn btn-primary rounded-pill px-3"> Editar</button>
+                            <button data-action="delete" data-index="${index}" class="btn btn-danger rounded-pill px-3"> Apagar</button>
+                        </div>
+                    </div>`
+                ;
                
-            cartaList.append(cartaElement);
-        }
+            }
+        cartaList.append(cartaElement);
     });
 }
 
 //UPDATE
 function editPost(index) {
-    const novoTexto = prompt("Editar post:", Cartas[index].text);
-    if (novoTexto !== null) {
-        Cartas[index].text = novoTexto;
+    const novoNome = prompt("Editar nome:", Cartas[index].nome);
+    const novoTime = prompt("Editar nome:", Cartas[index].nome);
+    const novoPosicao = prompt("Editar nome:", Cartas[index].nome);
+    const novoFoto = prompt("Editar nome:", Cartas[index].nome);
+    const novoGols = prompt("Editar nome:", Cartas[index].nome);
+    const novoAssitencias = prompt("Editar nome:", Cartas[index].nome);
+    const novoJogos = prompt("Editar quantidade de jogos participados:", Cartas[index].Jogos);
+    if (novoNome !== null) {
+        Cartas[index].nome = novoNome;
         saveCartas();
         displayCartas();
     }

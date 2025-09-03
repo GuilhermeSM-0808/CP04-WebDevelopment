@@ -18,13 +18,13 @@
     <!-- Formulário para criar um novo carta -->
     <form id="cartaForm">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <i class="fa-solid fa-pen"></i> <label for="cartaNome"> Digite o nome da jogadora:</label><br>
-                <textarea id="cartaNome" rows="4" cols="50" placeholder="Andressa Alves"></textarea><br>
+                <textarea id="cartaNome" rows="1" cols="50" placeholder="Andressa Alves"></textarea><br>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <i class="fa-solid fa-pen"></i> <label for="cartaClube"> Digite o nome do Clube da jogadora:</label><br>
-                <textarea id="cartaClube" rows="4" cols="50" placeholder="Clube/Time"></textarea><br>
+                <textarea id="cartaClube" rows="1" cols="50" placeholder="Clube/Time"></textarea><br>
             </div>
             <div class="col-md-4">
                 <i class="fa-solid fa-list"></i> <label for="cartaPosicao">Posicao:</label>
@@ -42,7 +42,7 @@
                     <option value="Segundo-Atacante">Segundo Atacante</option>
                 </select><br>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-12">
                 <i class="fa-solid fa-image"></i> <label for="cartaImage">Insira uma foto (URL):</label><br>
                 <input type="text" id="cartaImage" placeholder="Insira a url aqui"><br>
             </div>
@@ -58,15 +58,17 @@
                 <i class="fa-solid fa-futbol"></i> <label for="cartaJogos">Quantidade de jogos oficias participados:</label><br>
                 <input type="text" id="cartaJogos" placeholder="64"><br>
             </div>
-            <div class="col-md-4">
-                <i class="fa-solid fa-star"></i> <label for="cartaFavorita"><h4 class="fw-bold">Favorita?</h4></label>
-                <input type="checkbox" id="cartaFavorita" class="form-check-input"><br> <br>
+            <div class="col-md-12">
+                <div class="form-check mt-4">
+                    <i class="fa-solid fa-star"></i> <label for="cartaFavorita"><h4 class="fw-bold">Favorita?</h4></label>
+                    <input type="checkbox" id="cartaFavorita" class="form-check-input"><br><br>
+                </div>
             </div>
             <button type="submit"><i class="fa-solid fa-bullhorn"></i> Registrar Carta!</button>
         </div>
     </form>
 
-    <h1>Cartas de Jogadoras:</h1>
+    <h1 class="fw-bold">Cartas de Jogadoras:</h1>
 
     <!-- Lista de cartas -->
     <div id="cartaList" class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5"></div>

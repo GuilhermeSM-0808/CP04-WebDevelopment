@@ -15,7 +15,7 @@ body {
 
 header {
     background-color: #0c6918;
-    color: #fff;
+    color: #000000;
     padding: 10px 0;
     text-align: center;
     margin-bottom: 20px;
@@ -27,7 +27,7 @@ h1 {
 }
 
 form {
-    margin-bottom: 20px;
+    margin: 0px 50px 50px 50px;
 }
 
 label {
@@ -53,7 +53,7 @@ textarea {
 
 button {
     background-color: #0c4719;
-    color: #fff;
+    color: #000000;
     border: none;
     border-radius: 5px;
     padding: 10px 20px;
@@ -75,9 +75,6 @@ li {
     margin-bottom: 5px;
     padding: 15px;
 }
-/* #cartaList{
-   text-align: center;
-} */
 
 .card-post{
     display: flex;
@@ -89,4 +86,17 @@ li {
     background-color: darkgreen; 
     border-radius: 8px; 
     border: 3px solid rgb(4, 49, 4);
+}
+
+#cartaList{
+    margin: 5px 50px;
+}
+
+.text-border{
+    text-shadow: 2px 0 #000000, -2px 0 #000000, 0 2px #000000, 0 -2px #000000,
+             1px 1px #000000, -1px -1px #000000, 1px -1px #000000, -1px 1px #000000;
+}
+
+.favorita{
+    border: 4px solid gold;
 }
