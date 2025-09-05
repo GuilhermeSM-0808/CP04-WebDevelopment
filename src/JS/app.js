@@ -92,7 +92,7 @@ let Cartas = [
 ]
 
 // variavel global
-// let sentido = false;
+let sentido = true;
 
 
 // Inicialização
@@ -200,14 +200,15 @@ function displayCartas() {
     const filterClube = document.getElementById('filterClube').value.toLowerCase();
     const filterPosicao = document.getElementById('filterPosicao').value;
 
+    if (sentido){
+        Cartas = Cartas.sort( (a, b) => a.nome.localeCompare(b.nome) );
+    } else {
+        Cartas = Cartas.sort( (a, b) => b.nome.localeCompare(a.nome));
+    }
+
     let cartasFiltradas = Cartas.slice();
 
-    // REmovi ordenar por nome pois estava quebrando o indexing dos botões
-    // if (sentido){
-    //     cartasFiltradas = cartasFiltradas.sort( (a, b) => a.nome.localeCompare(b.nome) );
-    // } else {
-    //     cartasFiltradas = cartasFiltradas.sort( (a, b) => b.nome.localeCompare(a.nome));
-    // }
+
 
     if (filterPosicao !== "Todas") {
         cartasFiltradas = cartasFiltradas.filter(cartasFiltradas => cartasFiltradas.posicao === filterPosicao);
