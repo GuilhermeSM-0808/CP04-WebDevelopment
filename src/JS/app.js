@@ -37,7 +37,7 @@ let Cartas = [
     "gols": 1,
     "assistencias": 2,
     "jogos": 25,
-    "favorita": false
+    "favorita": true
   },
   {
     "nome": "Letícia Teles",
@@ -58,6 +58,8 @@ window.onload = function() {
 
     document.getElementById('cartaForm').addEventListener('submit', addCarta); 
     document.getElementById('cartaList').addEventListener('click', handleCartaListClick);
+    document.getElementById('filterNome').addEventListener('input', displayCartas);
+    document.getElementById('filterClube').addEventListener('input', displayCartas);
 };
 
 // ---------- Funções Auxiliares ----------
@@ -74,6 +76,13 @@ function handleCartaListClick(event) {
         editPost(index);
     } else if (action === "delete") {
         deletePost(index);
+    } else if (action === "favoritar") {
+        if (Cartas[index].favorita === "on") {
+            Cartas[index].favorita = false;
+        }
+        Cartas[index].favorita = !Cartas[index].favorita;
+        saveCartas();
+        displayCartas();
     }
 }
 
@@ -125,13 +134,16 @@ function displayCartas() {
     const cartaList = document.getElementById('cartaList');
     cartaList.innerHTML = '';
 
-    Cartas.forEach((pegaPost, index) => {
+    const filterValue = document.getElementById('filterNome').value.toLowerCase();
+    const filterClube = document.getElementById('filterClube').value.toLowerCase();
+
+    Cartas.filter(carta => carta.nome.toLowerCase().includes(filterValue)).filter(carta => carta.clube.toLowerCase().includes(filterClube)).forEach((pegaPost, index) => {
             const cartaElement = document.createElement('div');
             cartaElement.classList.add('carta-post');
 
         
             
-            if (pegaPost.favorita === "on") {
+            if (pegaPost.favorita === "on" || pegaPost.favorita === true) {
                 cartaElement.innerHTML = `
                     <div class="col">
                         <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg text-border favorita" style="background-image: url('${pegaPost.foto}');"> 
@@ -155,6 +167,7 @@ function displayCartas() {
                         <div class="mt-2 mb-2">
                             <button data-action="edit" data-index="${index}" class="btn btn-primary rounded-pill px-3"> Editar</button>
                             <button data-action="delete" data-index="${index}" class="btn btn-danger rounded-pill px-3"> Apagar</button>
+                            <button data-action="favoritar" data-index="${index}" class="btn btn-warning rounded-pill px-3"> <i class="fa fa-star" aria-hidden="true"></i> </button>
                         </div>
                     </div>`;
             } else {
@@ -165,6 +178,7 @@ function displayCartas() {
                                 <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">${pegaPost.nome}</h3> 
                                 <h4 class="pt-2 mt-2 mb-6 display-7 lh-1 fw-bold">${pegaPost.clube}</h4> 
                                 <h6 class="pt-2 mt-4 mb-6 display-7 lh-1 fw-bold">${pegaPost.posicao}</h6> 
+                                
                                 <ul class="d-flex list-unstyled mt-auto"> 
                                     <li class="d-flex align-items-center me-3 fw-bold"> 
                                         <p>Gols: ${pegaPost.gols}</p>
@@ -181,6 +195,7 @@ function displayCartas() {
                         <div class="mt-2 mb-2">
                             <button data-action="edit" data-index="${index}" class="btn btn-primary rounded-pill px-3"> Editar</button>
                             <button data-action="delete" data-index="${index}" class="btn btn-danger rounded-pill px-3"> Apagar</button>
+                            <button data-action="favoritar" data-index="${index}" class="btn btn-warning rounded-pill px-3"> <i class="fa fa-star-o" aria-hidden="true"></i> </button>
                         </div>
                     </div>`
                 ;
@@ -193,16 +208,25 @@ function displayCartas() {
 //UPDATE
 function editPost(index) {
     const novoNome = prompt("Editar nome:", Cartas[index].nome);
-    const novoTime = prompt("Editar nome:", Cartas[index].nome);
-    const novoPosicao = prompt("Editar nome:", Cartas[index].nome);
-    const novoFoto = prompt("Editar nome:", Cartas[index].nome);
-    const novoGols = prompt("Editar nome:", Cartas[index].nome);
-    const novoAssitencias = prompt("Editar nome:", Cartas[index].nome);
-    const novoJogos = prompt("Editar quantidade de jogos participados:", Cartas[index].Jogos);
-    if (novoNome !== null) {
+    const novoTime = prompt("Editar clube:", Cartas[index].clube);
+    const novoPosicao = prompt("Editar posição:", Cartas[index].posicao);
+    const novoFoto = prompt("Mudar link da imagem:", Cartas[index].foto);
+    const novoGols = prompt("Editar quantidade de gols:", Cartas[index].gols);
+    const novoAssitencias = prompt("Editar quatidade de assistencias:", Cartas[index].assistencias);
+    const novoJogos = prompt("Editar quantidade de jogos participados:", Cartas[index].jogos);
+    if (novoNome !== null && novoTime !== null && novoPosicao !== null && novoFoto !== null && novoGols !== null && novoAssitencias !== null && novoJogos !== null ) {
         Cartas[index].nome = novoNome;
+        Cartas[index].clube = novoTime;
+        Cartas[index].posicao = novoPosicao;
+        Cartas[index].foto = novoFoto;
+        Cartas[index].gols = novoGols;
+        Cartas[index].assistencias = novoAssitencias;
+        Cartas[index].jogos = novoJogos;
+        
         saveCartas();
         displayCartas();
+    } else {
+        alert("Um ou mais valores inseridos Invalidos. Tente novamente...");
     }
 }
 //DELETE

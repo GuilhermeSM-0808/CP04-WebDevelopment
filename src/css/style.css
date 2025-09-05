@@ -90,6 +90,7 @@ li {
 
 #cartaList{
     margin: 5px 50px;
+    min-width: 80%;
 }
 
 .text-border{
