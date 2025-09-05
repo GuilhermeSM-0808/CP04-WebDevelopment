@@ -35,7 +35,7 @@
                     <option value="Alas">Alas</option>
                     <option value="Libero">Libero</option>
                     <option value="Volante">Volante</option>
-                    <option value="Meio-Central">Meio-Central</option>
+                    <option value="Meio-campo">Meio-Campo</option>
                     <option value="Armadora">Armadora</option>
                     <option value="Pontas">Pontas</option>
                     <option value="Centroavante">Centroavante</option>
@@ -64,25 +64,57 @@
                     <input type="checkbox" id="cartaFavorita" class="form-check-input"><br><br>
                 </div>
             </div>
-            <button type="submit"><i class="fa-solid fa-bullhorn"></i> Registrar Carta!</button>
+            <div class="col-md-12 text-center ">
+                <button type="submit" class=""><i class="fa-solid fa-bullhorn"></i> Registrar Carta!</button>
+            </div>
         </div>
     </form>
 
-    <h1 class="fw-bold">Cartas de Jogadoras:</h1>
+    <section class="carta-list-container">
 
-    <br>
-    <div class="row">
-        <div class="col-md-4">
-            <i class="fa-solid fa-magnifying-glass"></i> <label for="filterNome">Filtrar por nome:</label>
-            <input type="text" id="filterNome" placeholder="Digite o nome da jogadora">
+        <h1 class="fw-bold text-center">Cartas de Jogadoras:</h1>
+
+        <br>
+        <div class="filtros">
+            <div class="row">
+                <div class="col-md-4">
+                    <i class="fa-solid fa-magnifying-glass"></i> <label for="filterNome">Filtrar por nome:</label>
+                    <input type="text" id="filterNome" placeholder="Digite o nome da jogadora">
+                </div>
+                <div class="col-md-4">
+                    <i class="fa-solid fa-magnifying-glass"></i> <label for="filterNome">Filtrar por Clube:</label>
+                    <input type="text" id="filterClube" placeholder="Digite o nome da jogadora">
+                </div>
+                <div class="col-md-4">
+                    <i class="fa-solid fa-filter"></i> <label for="filterNome">Filtrar por Posição:</label>
+                    <select type="select" id="filterPosicao">
+                        <option value="Todas">Todas</option>
+                        <option value="Goleira">Goleira</option>
+                        <option value="Zagueira">Zagueira</option>
+                        <option value="Lateral">Lateral</option>
+                        <option value="Alas">Alas</option>
+                        <option value="Libero">Libero</option>
+                        <option value="Volante">Volante</option>
+                        <option value="Meio-campo">Meio-Campo</option>
+                        <option value="Armadora">Armadora</option>
+                        <option value="Pontas">Pontas</option>
+                        <option value="Centroavante">Centroavante</option>
+                        <option value="Segundo-Atacante">Segundo Atacante</option>
+                    </select>
+                </div>
+                <!-- <div class="col-md-1 mt-4">
+                    <button data-action="sentido" id="sentidoBtn" class="btn btn-light rounded-pill px-3 sentido"> <i class="fa-solid fa-sort"></i> </button>
+                </div> -->
+            </div>
         </div>
-        <div class="col-md-4">
-            <i class="fa-solid fa-magnifying-glass"></i> <label for="filterNome">Filtrar por Clube:</label>
-            <input type="text" id="filterClube" placeholder="Digite o nome da jogadora">
+        <!-- Lista de cartas -->
+        <div class="carta-list-bg">
+            <div id="cartaList" class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5"></div>
         </div>
-    </div>
-    <!-- Lista de cartas -->
-    <div id="cartaList" class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5"></div>
+
+    </section>
+
+
 
     <script src="./src/JS/app.js"></script>
     <script src="https://kit.fontawesome.com/129b440489.js" crossorigin="anonymous"></script>

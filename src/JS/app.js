@@ -23,7 +23,7 @@ let Cartas = [
     "nome": "Mariza Nascimento",
     "posicao": "Zagueira",
     "clube": "Corinthians",
-    "foto": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbm5wKL8kgPDqQMfNOdum2IqURN2vyT822aA&s",
+    "foto": "https://www.ogol.com.br/img/jogadores/new/64/05/526405_mariza_20250723194000.png",
     "gols": 2,
     "assistencias": 1,
     "jogos": 32,
@@ -43,23 +43,70 @@ let Cartas = [
     "nome": "Letícia Teles",
     "posicao": "Zagueira",
     "clube": "Corinthians",
-    "foto": "https://esportenewsmundo.com.br/wp-content/uploads/2023/04/photo_5028456485507672716_y.jpg",
+    "foto": "https://cdn.meutimao.com.br/_upload/noticia/2025/01/06/leticia-teles-foi-um-dos-destaques-do-red-bull-34941w.jpg",
     "gols": 0,
     "assistencias": 0,
     "jogos": 18,
     "favorita": false
+  },
+  {
+    "nome": "Alisha Lehmann",
+    "posicao": "Zagueira",
+    "clube": "Aston Villa",
+    "foto": "https://conteudo.imguol.com.br/c/esporte/6a/2022/06/12/alisha-lehmann-e-atacante-da-selecao-da-suica-e-atua-no-aston-villa-time-do-namorado-douglas-luiz-1655087892478_v2_3x4.jpg",
+    "gols": 23,
+    "assistencias": 6,
+    "jogos": 90,
+    "favorita": true
+  },
+  {
+    "nome": "Geyse Ferreira",
+    "posicao": "Centroavante",
+    "clube": "Gotham FC",
+    "foto": "https://p2.trrsf.com.br/image/fget/cf/540/960/smart/images.terra.com/2023/07/11/foto-rafael-ribeiro-somyflmlnwol.png",
+    "gols": 999,
+    "assistencias": 2,
+    "jogos": 2,
+    "favorita": false
+  },
+  {
+    "nome": "Esther González Rodríguez",
+    "posicao": "Centroavante",
+    "clube": "Gotham FC",
+    "foto": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSTA7PTaqoVe9PPZHr6nCgTTGjPvPbkb3xQq3UTYZNlzqlTkm05RS8Op-PJyd4J0kFdVnmnNSfDkspQNbjTVdQq4Ef-W80CoMXOhC8dzQo",
+    "gols": 12,
+    "assistencias": 0,
+    "jogos": 17,
+    "favorita": false
+  },
+  {
+    "nome": "Bruna Santos Nhaia",
+    "posicao": "Lateral",
+    "clube": "Gotham FC",
+    "foto": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpILzLk51tHjElqd7cGLrjxEBqSRiCAJDC_zCjeFfo4iqo5vZs2ZGLayv77VMIqQ0Chn_RY1qbjAYCLU5JWFNH82KqNM5KUWKqOqtls-E",
+    "gols": 0,
+    "assistencias": 0,
+    "jogos": 12,
+    "favorita": false
   }
 ]
 
+// variavel global
+// let sentido = false;
+
+
 // Inicialização
 window.onload = function() {
+
     loadCartas();
     displayCartas();
 
     document.getElementById('cartaForm').addEventListener('submit', addCarta); 
     document.getElementById('cartaList').addEventListener('click', handleCartaListClick);
+    document.getElementById('sentidoBtn').addEventListener('click', handleSentidoClick);
     document.getElementById('filterNome').addEventListener('input', displayCartas);
     document.getElementById('filterClube').addEventListener('input', displayCartas);
+    document.getElementById('filterPosicao').addEventListener('change', displayCartas);
 };
 
 // ---------- Funções Auxiliares ----------
@@ -77,13 +124,19 @@ function handleCartaListClick(event) {
     } else if (action === "delete") {
         deletePost(index);
     } else if (action === "favoritar") {
-        if (Cartas[index].favorita === "on") {
-            Cartas[index].favorita = false;
-        }
         Cartas[index].favorita = !Cartas[index].favorita;
         saveCartas();
         displayCartas();
     }
+}
+function handleSentidoClick(event) {
+    const clickedElement = event.target.closest("button"); // garante que pega o botão
+    if (!clickedElement) return;
+
+    sentido = !sentido;
+    console.log(sentido);
+    
+    displayCartas();
 }
 
 // Função para salvar no LocalStorage
@@ -109,8 +162,13 @@ function addCarta(event) {
     const cartaGols = document.getElementById('cartaGols').value;
     const cartaAssistencias = document.getElementById('cartaAssistencias').value;
     const cartaJogos = document.getElementById('cartaJogos').value;
-    const cartaFavorita = document.getElementById('cartaFavorita').value;
+    const cartaFavorita = document.getElementById('cartaFavorita').checked;
     
+    if (!cartaNome || !cartaPosicao || !cartaClube || !cartaImage || !cartaGols || !cartaAssistencias || !cartaJogos) {
+        alert("Por favor, preencha todos os campos.");
+        return;
+    }
+
     const carta = { 
         nome: cartaNome, 
         posicao: cartaPosicao, 
@@ -124,84 +182,102 @@ function addCarta(event) {
     
     Cartas.unshift(carta);
     saveCartas(); // salva no localStorage
+
     
     document.getElementById('cartaForm').reset();
     displayCartas();
+    
+    alert("Jogadora adicionada com sucesso!");
 }
 
 // READ
 function displayCartas() {
+    
     const cartaList = document.getElementById('cartaList');
     cartaList.innerHTML = '';
 
-    const filterValue = document.getElementById('filterNome').value.toLowerCase();
+    const filterNome = document.getElementById('filterNome').value.toLowerCase();
     const filterClube = document.getElementById('filterClube').value.toLowerCase();
+    const filterPosicao = document.getElementById('filterPosicao').value;
 
-    Cartas.filter(carta => carta.nome.toLowerCase().includes(filterValue)).filter(carta => carta.clube.toLowerCase().includes(filterClube)).forEach((pegaPost, index) => {
-            const cartaElement = document.createElement('div');
-            cartaElement.classList.add('carta-post');
+    let cartasFiltradas = Cartas.slice();
 
+    // REmovi ordenar por nome pois estava quebrando o indexing dos botões
+    // if (sentido){
+    //     cartasFiltradas = cartasFiltradas.sort( (a, b) => a.nome.localeCompare(b.nome) );
+    // } else {
+    //     cartasFiltradas = cartasFiltradas.sort( (a, b) => b.nome.localeCompare(a.nome));
+    // }
+
+    if (filterPosicao !== "Todas") {
+        cartasFiltradas = cartasFiltradas.filter(cartasFiltradas => cartasFiltradas.posicao === filterPosicao);
+    }
+
+    cartasFiltradas.filter(cartasFiltradas => cartasFiltradas.nome.toLowerCase().includes(filterNome)).filter(cartasFiltradas => cartasFiltradas.clube.toLowerCase().includes(filterClube)).forEach((pegaPost, index) => {
+        const cartaElement = document.createElement('div');
+        cartaElement.classList.add('carta-post');
+
+    
         
+        if (pegaPost.favorita) {
+            cartaElement.innerHTML = `
+                <div class="col">
+                    <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg text-border favorita" style="background-image: url('${pegaPost.foto}');"> 
+                        <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1"> 
+                            <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">${pegaPost.nome}</h3> 
+                            <h4 class="pt-2 mt-2 mb-6 display-7 lh-1 fw-bold">${pegaPost.clube}</h4> 
+                            <h6 class="pt-2 mt-4 mb-6 display-7 lh-1 fw-bold">${pegaPost.posicao}</h6> 
+                            <ul class="d-flex list-unstyled mt-auto"> 
+                                <li class="d-flex align-items-center me-3 fw-bold"> 
+                                    <p>Gols: ${pegaPost.gols}</p>
+                                </li> 
+                                <li class="d-flex align-items-center me-3 fw-bold">                                
+                                    <p>Assitencias: ${pegaPost.assistencias}</p> 
+                                </li> 
+                                <li class="d-flex align-items-center me-3 fw-bold">                                 
+                                    <p>Jogos: ${pegaPost.jogos}</p> 
+                                </li> 
+                            </ul> 
+                        </div> 
+                    </div> 
+                    <div class="mt-2 mb-2 botoes">
+                        <button data-action="edit" data-index="${index}" class="btn btn-primary rounded-pill px-3"> Editar</button>
+                        <button data-action="delete" data-index="${index}" class="btn btn-danger rounded-pill px-3"> Apagar</button>
+                        <button data-action="favoritar" data-index="${index}" class="btn btn-warning rounded-pill px-3"> <i class="fa fa-star" aria-hidden="true"></i> </button>
+                    </div>
+                </div>`;
+        } else {
+            cartaElement.innerHTML = `
+                <div class="col">
+                    <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg text-border" style="background-image: url('${pegaPost.foto}');"> 
+                        <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1"> 
+                            <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">${pegaPost.nome}</h3> 
+                            <h4 class="pt-2 mt-2 mb-6 display-7 lh-1 fw-bold">${pegaPost.clube}</h4> 
+                            <h6 class="pt-2 mt-4 mb-6 display-7 lh-1 fw-bold">${pegaPost.posicao}</h6> 
+                            
+                            <ul class="d-flex list-unstyled mt-auto"> 
+                                <li class="d-flex align-items-center me-3 fw-bold"> 
+                                    <p>Gols: ${pegaPost.gols}</p>
+                                </li> 
+                                <li class="d-flex align-items-center me-3 fw-bold">                                
+                                    <p>Assitencias: ${pegaPost.assistencias}</p> 
+                                </li> 
+                                <li class="d-flex align-items-center me-3 fw-bold">                                 
+                                    <p>Jogos: ${pegaPost.jogos}</p> 
+                                </li> 
+                            </ul> 
+                        </div> 
+                    </div> 
+                    <div class="mt-2 mb-2 botoes">
+                        <button data-action="edit" data-index="${index}" class="btn btn-primary rounded-pill px-3"> Editar</button>
+                        <button data-action="delete" data-index="${index}" class="btn btn-danger rounded-pill px-3"> Apagar</button>
+                        <button data-action="favoritar" data-index="${index}" class="btn btn-warning rounded-pill px-3"> <i class="fa fa-star-o" aria-hidden="true"></i> </button>
+                    </div>
+                </div>`
+            ;
             
-            if (pegaPost.favorita === "on" || pegaPost.favorita === true) {
-                cartaElement.innerHTML = `
-                    <div class="col">
-                        <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg text-border favorita" style="background-image: url('${pegaPost.foto}');"> 
-                            <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1"> 
-                                <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">${pegaPost.nome}</h3> 
-                                <h4 class="pt-2 mt-2 mb-6 display-7 lh-1 fw-bold">${pegaPost.clube}</h4> 
-                                <h6 class="pt-2 mt-4 mb-6 display-7 lh-1 fw-bold">${pegaPost.posicao}</h6> 
-                                <ul class="d-flex list-unstyled mt-auto"> 
-                                    <li class="d-flex align-items-center me-3 fw-bold"> 
-                                        <p>Gols: ${pegaPost.gols}</p>
-                                    </li> 
-                                    <li class="d-flex align-items-center me-3 fw-bold">                                
-                                        <p>Assitencias: ${pegaPost.assistencias}</p> 
-                                    </li> 
-                                    <li class="d-flex align-items-center me-3 fw-bold">                                 
-                                        <p>Jogos: ${pegaPost.jogos}</p> 
-                                    </li> 
-                                </ul> 
-                            </div> 
-                        </div> 
-                        <div class="mt-2 mb-2">
-                            <button data-action="edit" data-index="${index}" class="btn btn-primary rounded-pill px-3"> Editar</button>
-                            <button data-action="delete" data-index="${index}" class="btn btn-danger rounded-pill px-3"> Apagar</button>
-                            <button data-action="favoritar" data-index="${index}" class="btn btn-warning rounded-pill px-3"> <i class="fa fa-star" aria-hidden="true"></i> </button>
-                        </div>
-                    </div>`;
-            } else {
-                cartaElement.innerHTML = `
-                    <div class="col">
-                        <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg text-border" style="background-image: url('${pegaPost.foto}');"> 
-                            <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1"> 
-                                <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">${pegaPost.nome}</h3> 
-                                <h4 class="pt-2 mt-2 mb-6 display-7 lh-1 fw-bold">${pegaPost.clube}</h4> 
-                                <h6 class="pt-2 mt-4 mb-6 display-7 lh-1 fw-bold">${pegaPost.posicao}</h6> 
-                                
-                                <ul class="d-flex list-unstyled mt-auto"> 
-                                    <li class="d-flex align-items-center me-3 fw-bold"> 
-                                        <p>Gols: ${pegaPost.gols}</p>
-                                    </li> 
-                                    <li class="d-flex align-items-center me-3 fw-bold">                                
-                                        <p>Assitencias: ${pegaPost.assistencias}</p> 
-                                    </li> 
-                                    <li class="d-flex align-items-center me-3 fw-bold">                                 
-                                        <p>Jogos: ${pegaPost.jogos}</p> 
-                                    </li> 
-                                </ul> 
-                            </div> 
-                        </div> 
-                        <div class="mt-2 mb-2">
-                            <button data-action="edit" data-index="${index}" class="btn btn-primary rounded-pill px-3"> Editar</button>
-                            <button data-action="delete" data-index="${index}" class="btn btn-danger rounded-pill px-3"> Apagar</button>
-                            <button data-action="favoritar" data-index="${index}" class="btn btn-warning rounded-pill px-3"> <i class="fa fa-star-o" aria-hidden="true"></i> </button>
-                        </div>
-                    </div>`
-                ;
-               
-            }
-        cartaList.append(cartaElement);
+        }
+    cartaList.append(cartaElement);
     });
 }
 
@@ -225,6 +301,7 @@ function editPost(index) {
         
         saveCartas();
         displayCartas();
+        alert("Jogadora editada com sucesso!");
     } else {
         alert("Um ou mais valores inseridos Invalidos. Tente novamente...");
     }
@@ -236,5 +313,6 @@ function deletePost(index) {
         Cartas.splice(index, 1);
         saveCartas();
         displayCartas();
+        alert("Jogadora removida com sucesso!");
     }
 }

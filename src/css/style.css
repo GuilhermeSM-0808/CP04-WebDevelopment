@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #92b694;
+    background-color: #2e5975;
     margin: 0;
     padding: 0;
     display: flex;
@@ -14,8 +14,8 @@ body {
 }
 
 header {
-    background-color: #0c6918;
-    color: #000000;
+    background-color: #458ada;
+    color: #dfdfdf;
     padding: 10px 0;
     text-align: center;
     margin-bottom: 20px;
@@ -52,7 +52,7 @@ textarea {
   }
 
 button {
-    background-color: #0c4719;
+    background-color: #c9d425;
     color: #000000;
     border: none;
     border-radius: 5px;
@@ -62,7 +62,8 @@ button {
 }
 
 button:hover {
-    background-color: #0c7bcb;
+    background-color: #cb220c;
+    color: white;
 }
 
 ul {
@@ -74,6 +75,11 @@ li {
     border-radius: 5px;
     margin-bottom: 5px;
     padding: 15px;
+}
+
+section h1 {
+    text-align: center;
+    margin: 50px;
 }
 
 .card-post{
@@ -88,6 +94,24 @@ li {
     border: 3px solid rgb(4, 49, 4);
 }
 
+.carta-list-container {
+    background-color: #112b10;
+    width: 100%;
+    color: white;
+}
+.carta-list-bg {
+    background-color: #052204;
+    width: 100%;
+    margin: 40px 0;
+    color: white;
+}
+.filtros{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 10px 0;
+}
+
 #cartaList{
     margin: 5px 50px;
     min-width: 80%;
@@ -100,4 +124,29 @@ li {
 
 .favorita{
     border: 4px solid gold;
+}
+
+.btn-warning:hover{
+    background-color: rgb(248, 182, 0);
+    color: rgb(255, 255, 255);
+}
+
+.botaoregistrar{
+    max-width: 60%;
+    min-width: 20%;
+    cursor: pointer;
+    margin-top: 10px;
+
+}
+ 
+.sentido:hover {
+    background-color: black;
+    color: white;
+}
+
+.botoes{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+
 }
